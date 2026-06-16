@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salorian — Design, Development & Cybersecurity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f0;
+      --accent: #c8f04a;
+      --mid: #1a1a1a;
+      --muted: #666;
+      --border: #222;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--black) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2rem;
+      font-weight: 600 !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 2.5rem 5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(4rem, 12vw, 10rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .hero-desc {
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--black);
+      padding: 0.875rem 2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .hero-cta:hover { opacity: 0.85; }
+
+    /* SERVICES */
+    .services {
+      padding: 6rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .service-item {
+      padding: 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .service-item:last-child { border-right: none; }
+
+    .service-num {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-item h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .service-item p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 6rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-left h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .about-left h2 span { color: var(--accent); }
+
+    .about-right p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      grid-column: 1 / -1;
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* TEAM */
+    .team {
+      padding: 6rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .team-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1.75rem 1.25rem;
+    }
+
+    .team-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      color: var(--black);
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .team-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .team-card span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 6rem 2.5rem;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact h2 span { color: var(--accent); }
+
+    .contact p {
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .contact-email:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .service-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .service-item:last-child { border-bottom: none; }
+      .about { grid-template-columns: 1fr; gap: 2rem; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats { grid-template-columns: repeat(3, 1fr); }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 0 1.5rem 4rem; }
+      .services, .about, .team, .contact { padding: 4rem 1.5rem; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .nav-links li:not(:last-child) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">SALORIAN</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <p class="hero-tag">Design · Development · Cybersecurity</p>
+    <h1>We Build<br>What <span>Moves</span><br>People.</h1>
+    <div class="hero-sub">
+      <p class="hero-desc">A bold, forward-thinking studio of five specialists. We design, build, and secure digital experiences for brands that mean business.</p>
+      <a href="#contact" class="hero-cta">Start a Project →</a>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <p class="section-label">What We Do</p>
+    <div class="services-grid">
+      <div class="service-item">
+        <p class="service-num">01</p>
+        <h3>Web Design</h3>
+        <p>From wireframes to pixel-perfect interfaces, we craft visuals that convert and captivate. Every design decision is intentional — built around your users and your brand.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-num">02</p>
+        <h3>Web Development</h3>
+        <p>Clean, fast, scalable code. We build websites and web applications that perform flawlessly across every device and platform — no shortcuts, no compromises.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-num">03</p>
+        <h3>Cybersecurity</h3>
+        <p>Your digital presence is only as strong as its security. We help businesses identify vulnerabilities, protect their systems, and stay ahead of threats.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-left">
+      <p class="section-label">About Us</p>
+      <h2>Built to Build<br><span>Better.</span></h2>
+    </div>
+    <div class="about-right">
+      <p>We are Salorian — a bold, forward-thinking studio built by a team of five specialists who believe great digital work should be beautiful, functional, and secure.</p>
+      <p>We started with a simple conviction: businesses of every size deserve world-class digital presence and protection. Too many brands are held back by websites that underperform and systems that are vulnerable. We exist to change that.</p>
+      <p>From early-stage startups to established businesses ready for a digital overhaul, what stays constant is our standard — intentional design, clean code, and systems built to withstand the threats of a digital world.</p>
+    </div>
+    <div class="stats">
+      <div>
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div>
+        <div class="stat-num">5</div>
+        <div class="stat-label">Specialist Team</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <p class="section-label">Our Team</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">PAF</div>
+        <h4>Peter Anderson Flick</h4>
+        <span>CEO</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">JNG</div>
+        <h4>James Nelson George</h4>
+        <span>Lead Developer</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">DKL</div>
+        <h4>David Kelvin Lucas</h4>
+        <span>Cybersecurity Specialist</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">FRN</div>
+        <h4>Felix Richard Noah</h4>
+        <span>UI/UX Designer</span>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">FJ</div>
+        <h4>Favour Joy</h4>
+        <span>Brand Strategist</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Let's Build<br>Something <span>Great.</span></h2>
+    <p>Have a project in mind? We'd love to hear it. Reach out and let's talk about what we can build together.</p>
+    <a href="mailto:hello@salorian.org" class="contact-email">hello@salorian.org</a>
+  </section>
+
+  <footer>
+    <span>© 2025 Salorian. All rights reserved.</span>
+    <span>salorian.org</span>
+  </footer>
+
+</body>
+</html>
